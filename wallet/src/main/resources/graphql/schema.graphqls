@@ -1,0 +1,39 @@
+type Query{
+    userWallets: [Wallet],
+    walletById(id:String):Wallet,
+    currencies:[Currency]
+}
+
+type Wallet{
+    id:String,
+    balance:Float,
+    createdAt:Float
+    currency:Currency
+    walletTransactions:[WalletTransaction]
+}
+type Mutation{
+    addWallet(walletRequestDTO:AddWalletRequestDTO):Wallet,
+    walletTransfer(sourceWalletId:String,destinationWalletId:String,amount:Float):[WalletTransaction]
+
+}
+input AddWalletRequestDTO{
+    currencyCode:String,
+    balance:Float
+}
+
+type Currency{
+    code:String,
+    name:String,
+    salePrice:Float,
+    purchasePrice:Float
+}
+type WalletTransaction{
+    id:Int,
+    timestamp:Float,
+    wallet:Wallet,
+    amount: Float
+    type:String,
+    currentSaleCurrencyPrice:Float,
+    currentPurchaseCurrencyPrice:Float,
+
+}
